@@ -3,7 +3,7 @@
 <head>
 
 	<meta charset="UTF-8">
-	<title>Beyond Ideal Geometry: RoMAP</title>
+	<title>RoMAP | Robust Multi-modal Affordance Prediction</title>
 
 	<link rel="stylesheet" type="text/css" href="layout.css">
 
@@ -291,7 +291,7 @@
 
 <body>
 	<div class="center-justified" style="width:1000px;">
-		<h1>Beyond Ideal Geometry: Structure-Aware Stabilization and Completion for Robust Multimodal Affordance Prediction</h1>
+		<h1>RoMAP: Robust Multi-modal Affordance Prediction under Non-Ideal Point Clouds</h1>
 	</div>
 
 	<!-- Authors -->
@@ -304,7 +304,7 @@
 
 	<div class="center-justified">
 		<p>
-			<b>ABSTRACT:</b> Affordance understanding is essential for enabling intelligent agents to interact with objects in real-world environments. However, existing methods rely on high-quality 3D observations or assume homogeneous input modalities, limiting their applicability when inputs are heterogeneous and 3D geometry is degraded by noise, sparsity, and occlusion. In this work, we propose <span class="romap">RoMAP</span>, a multi-modal affordance prediction framework that unifies RGB images and 3D point clouds for reliable language-guided affordance reasoning under degraded observations. Specifically, we introduce a mask-guided 3D Gaussian splatting module that reconstructs geometry-consistent object-centric representations from RGB observations, enabling cross-modal geometric perception. Furthermore, we propose two complementary degradation-aware modules: adaptive noise filtering and sparse point enhancement, which improve representation stability against noisy and sparse point clouds. Finally, a language-guided decoder is designed to establish fine-grained semantic-geometry alignment for affordance grounding conditioned on textual queries. Experiments on multiple benchmarks show that <span class="romap">RoMAP</span> outperforms existing methods under both clean and degraded conditions, with consistent gains in affordance localization accuracy across diverse input modalities.
+			<b>ABSTRACT:</b> Language-guided 3D affordance prediction identifies object regions that support actions specified by natural-language queries. In real-world settings, however, point clouds acquired through sensing or image-based reconstruction can contain outliers, uneven sampling, and locally missing surfaces, complicating fine-grained affordance localization. We present <span class="romap">RoMAP</span>, a robust multimodal framework that addresses these challenges through reliability-aware feature calibration and context-aware enhancement. First, Reliability-Aware Feature Calibration (RFC) uses point representations and local geometry to reduce the influence of unreliable observations during feature interaction. Context-aware Feature Enhancement (CFE) then aggregates relevant information from other visible points, including spatially distant points, to enrich incomplete local context. For RGB inputs, mask-guided 3D Gaussian Splatting supplies an object-centric 3D representation before language-guided affordance prediction. We evaluate the approach on native, reconstructed, and perturbed point clouds to study robustness under non-ideal observations.
 		</p>
 
 		<br>
@@ -316,7 +316,7 @@
 			<img width=1000 src="figure/motivation.png" alt="RoMAP Motivation">
 		</div>
 		<p>
-			(a) While existing cross-modal methods leverage 2D interactive cues (e.g., a grasping hand) to infer semantic intent, they struggle to establish strict semantic-geometric alignment, yielding diffuse predictions rather than precise 3D localization. (b) Similarly, conventional language-guided 3D methods rely on high-quality geometry and fail on noisy or sparse data. (c) Our <span class="romap">RoMAP</span> framework flexibly handles multimodal inputs, including 3D point cloud (Option A), multi-view RGB image (Option B) and language instructions. By addressing noise and sparsity via the ANF and SPE modules, it achieves robust and precise affordance grounding.
+			(a–b) Imperfect point clouds, including outliers, irregular sampling, and locally missing regions, make language-guided affordance localization more challenging. The impact of a perturbation can depend on its position relative to the affordance region associated with the current query. Our <span class="romap">RoMAP</span> approach follows a calibrate-then-enhance strategy: RFC reduces interference from unreliable observations, while CFE uses relevant context from visible points to strengthen the representation of incomplete regions.
 		</p>
 
 		<br>
@@ -328,7 +328,7 @@
 			<img width=1000 src="figure/framework.png" alt="RoMAP Framework">
 		</div>
 		<p>
-			The model takes multimodal visual inputs and natural language queries to predict 3D functional affordances. (Top) For 2D image inputs (Option A), a Mask-Guided 3D Gaussian Splatting module segments the target object from the background to reconstruct clean, object-centric point clouds. (Middle) The reconstructed representations (Option A) or native 3D point clouds (Option B) are fed into a Degradation-Aware Feature Enhancement encoder, where the ANF achieves uncertainty-aware feature stabilization, and the SPE performs structure-aware geometric completion. (Bottom) The Language-Guided Semantic Fusion and Prediction module fuses point features with text queries to output affordance masks.
+			RoMAP predicts the point-level functional region indicated by a natural-language query. For RGB-image inputs, Mask-Guided 3D Gaussian Splatting first reconstructs an object-centric representation. Reconstructed or native point clouds are processed by a hierarchical point-cloud encoder with two complementary components: <strong>Reliability-Aware Feature Calibration (RFC)</strong> adjusts feature interactions using local reliability cues, followed by <strong>Context-aware Feature Enhancement (CFE)</strong>, which aggregates task-relevant context across visible points beyond local spatial neighborhoods. The resulting point features are fused with language features for affordance prediction.
 		</p>
 
 		<br>
