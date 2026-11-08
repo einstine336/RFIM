@@ -2,7 +2,7 @@
 
 **Robust Feature Interaction Modulation**
 
-RFIM is an ongoing research project on **language-guided 3D affordance prediction** under non-ideal point-cloud conditions.
+RFIM is a research project on **language-guided 3D affordance prediction** under non-ideal point-cloud conditions.
 
 The approach uses two complementary components:
 
